@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+form {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 6px;
+    font-size: 14px;
+    width: 200px;
+}
+
+button {
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 30px; /* 고정 높이 */
+
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.checkAll {
+    width: 20px; /* 원하시는 만큼 줄이기 */
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.bottom-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.register-link {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.register-link:hover {
+    background-color: #218838;
+}

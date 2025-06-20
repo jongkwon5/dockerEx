@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>사용자 등록</title>
+</head>
+<body>
+<h1>사용자 등록</h1>
+<form id="userForm">
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="name" th:value="${user.name}" required/>
+    <label for="email">이메일:</label>
+    <input type="email" id="email" name="email" th:value="${user.email}" required/>
+
+    <button type="submit">등록</button>
+    <button type="button" onclick="location.href='/users'">목록으로 가기</button>
+</form>
+</body>
+<script>
+    document.getElementById("userForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // 폼 기본 제출 막기
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        fetch("/users/api", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("등록이 완료되었습니다.");
+                    location.href = "/users"; // 목록으로 이동
+                } else {
+                    alert(data.message); // 중복 이름 메시지
+                }
+            })
+            .catch(err => {
+                console.error("오류:", err);
+                alert("서버 오류가 발생했습니다.");
+            });
+    });
+</script>
+</html>

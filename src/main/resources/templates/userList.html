@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>사용자 목록</title>
+  <link rel="stylesheet" href="/css/userList.css">
+</head>
+<body>
+<h1>사용자 목록</h1>
+
+<!-- 🔍 검색창 -->
+<form th:action="@{/users}" method="get" style="text-align: right; margin-bottom: 10px;">
+  <input type="text" name="keyword" placeholder="이름 또는 이메일 검색">
+  <button type="submit">검색</button>
+</form>
+
+<!-- 삭제 -->
+  <table>
+    <thead>
+    <tr>
+      <th style="width: 40px;"><input type="checkbox" onclick="toggleAll(this)" /></th>
+      <th>ID</th>
+      <th>이름</th>
+      <th>이메일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td>
+        <input type="checkbox" class="user-checkbox"/>
+        <input type="hidden" class="user-id" th:value="${user.id}"/>
+        <input type="hidden" class="user-name" th:value="${user.name}"/>
+      </td>
+      <td><a th:href="@{'/users/' + ${user.id}}" th:text="${user.id}"></a></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.email}"></td>
+    </tr>
+    </tbody>
+  </table>
+<div style="margin-top: 20px; text-align: center">
+  <span th:if="${totalPages > 1}" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+  <a th:href="@{'/users'(page=${i}, keyword=${keyword})}"
+     th:text="${i + 1}"
+     th:classappend="(${i} == ${currentPage}) ? 'active-page' : ''"
+     style="margin: 0 5px; text-decoration: none; color: black;">1</a>
+</span>
+</div>
+  <div class="bottom-actions">
+    <a th:href="@{/users/new}" class="register-link">+ 사용자 등록</a>
+    <button onclick="deleteSelectedUsers()" style="margin-left: 10px; background-color: #dc3545; color: white;">선택 삭제</button>
+    <form th:action="@{/users}" method="get" style="display: inline;">
+      <input type="hidden" name="sort" value="name">
+      <input type="hidden" name="keyword" th:value="${keyword}">
+      <button type="submit" th:disabled="${#lists.isEmpty(users)}">이름순 정렬</button>
+    </form>
+    <form th:action="@{/users}" method="get" style="display: inline;">
+      <input type="hidden" name="sort" value="email">
+      <input type="hidden" name="keyword" th:value="${keyword}">
+      <button type="submit" th:disabled="${#lists.isEmpty(users)}">email순 정렬</button>
+    </form>
+    <form th:action="@{/users}" method="get" style="display: inline;">
+      <input type="hidden" name="sort" value="id">
+      <input type="hidden" name="keyword" th:value="${keyword}">
+      <button type="submit" th:disabled="${#lists.isEmpty(users)}">기본 정렬</button>
+    </form>
+  </div>
+
+
+</body>
+<script src="/js/userList.js"></script>
+</html>

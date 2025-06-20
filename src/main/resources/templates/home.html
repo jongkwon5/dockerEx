@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>메인 페이지</title>
+    <style>
+        .welcome-box {
+            width: 400px;
+            height: 200px;
+            margin: 100px auto;
+            padding: 20px;
+            border: 2px solid #000;
+            text-align: center;
+            line-height: 160px;
+            font-size: 24px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="welcome-box" th:onclick="'location.href=\'/users\''">
+    환영합니다! 클릭하면 등록 화면으로 이동합니다.!!!!!!!!!!!!!!
+</div>
+</body>
+</html>
